@@ -14,7 +14,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "importHelpers": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": "src"
   },
   "include": [
     // @if jest || jasmine || mocha
