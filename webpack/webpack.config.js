@@ -3,6 +3,7 @@
 // @endif
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const Dotenv = require('dotenv-webpack');
 // @if jasmine || mocha
@@ -283,6 +284,10 @@ module.exports = function(env, { /* @if jasmine || mocha*/runTest, /* @endif */a
     // @endif
     plugins: [
       /* @if plugin */!production && /* @endif */new HtmlWebpackPlugin({ template: 'index.html', favicon: 'favicon.ico' }),
+      new CopyWebpackPlugin({patterns: [
+        { from: 'static', to: path.resolve(__dirname, 'dist') },
+        // { from: 'locales', to: path.resolve(__dirname, 'dist/locales') }
+      ]}),
       new Dotenv({
         path: `./.env${production ? '' :  '.' + (process.env.NODE_ENV || 'development')}`,
       }),
